@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="style/style.css" />
+    <title>Farting game</title>
+</head>
+
+<body>
+    <!-- Modal  for loading-->
+    <div class="modal fade in fade-scale bd-example-modal-sm" id="loading" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body d-flex justify-content-center">
+                    <img src="img/dice/loading.gif" class="loading">
+                    <img src="" class="dice">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Set score modal-->
+
+
+    <div class="modal fade" id="setscoremodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <button id="10" type="button" class="col btn btn-primary setvalue mb-3 btn-lg" data-dismiss="modal"
+                        onClick="getValue()">10 Points</button>
+                    <button id="20" type="button" class="col btn btn-primary setvalue mb-3 btn-lg" data-dismiss="modal"
+                        onClick="getValue()">20 Points</button>
+                    <button id="50" type="button" class="col btn btn-primary setvalue mb-3 btn-lg" data-dismiss="modal"
+                        onClick="getValue()">50 Points</button>
+                    <button id="70" type="button" class="col btn btn-primary setvalue mb-3 btn-lg" data-dismiss="modal"
+                        onClick="getValue()">70 Points</button>
+                    <button id="100" type="button" class="col btn btn-primary setvalue mb-3 btn-lg" data-dismiss="modal"
+                        onClick="getValue()">100 Points</button>
+                    <button id="150" type="button" class="col btn btn-primary setvalue mb-3 btn-lg" data-dismiss="modal"
+                        onClick="getValue()">150 Points</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 1 player or 2 player-->
+    <div class="modal fade pointsmodal" id="chooseplayer" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-center">
+                    <h5 class="modal-title">Farting Game</h5>
+
+                </div>
+
+                <div class="modal-body">
+                    <button id="chooseplayer" type="button" class="btn btn-primary player1" data-dismiss="modal"
+                        data-toggle="modal" data-target="#setscoremodal" data-whatever="@mdo">1 PLAYER</button>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary player2" data-dismiss="modal" data-toggle="modal"
+                        data-target="#setscoremodal" data-whatever="@mdo">2 PLAYER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-sm panel player-0-panel mt-2">
+                <h6 class="player player-name-0">Player 1<span class="badge badge-secondary player-play"></span></h6>
+                <div class="points-box player-0-points">
+                    <h5 class="points score-0"></h5>
+                </div>
+                <div class="col-12 align-self-center current-box mt-3">
+                    <div class="col current-text">
+                        Current
+                    </div>
+                    <div class="col current-points current-0">
+                        0
+
+                    </div>
+                    <div class="progress" style="height: 3px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated player-progress-0"
+                            role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="current-dice-box current-box-0">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-sm panel player-1-panel" style="border-bottom: 1px solid rgba(240, 52, 52, .9);">
+                <h6 class="player player-name-1">Computer<span class="badge badge-secondary player-play"></span></h6>
+                <div class="points-box player-1-points">
+                    <h5 class="points score-1">0</h5>
+                </div>
+                <div class="col-12 align-self-center current-box mt-3">
+                    <div class="col current-text">
+                        Current
+                    </div>
+                    <div class="col current-points current-1">
+                        18
+                    </div>
+                    <div class="progress" style="height: 3px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated player-progress-1"
+                            role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="current-dice-box current-box-1">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row buttongroup">
+
+            <div id="roll" class="col d-flex justify-content-center first buttons roll" data-toggle="modal"
+                data-target="#loading">
+                <img src="img/buttons/rolling-dices.svg" alt="" style="width: 65px; height: 65px; " />
+            </div>
+            <div id="hold" class="col d-flex justify-content-center buttons hold">
+                <img class="shake" src="img/buttons/halt.svg" alt="" style="width: 65px; height: 65px;" />
+            </div>
+
+            <div class="col d-flex justify-content-center buttons again" alt="">
+                <img class="sdf" src="img/buttons/anticlockwise-rotation.svg" alt=""
+                    style="width: 65px; height: 65px; " />
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <audio id="add">
+        <source src="./sound/add.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="shake">
+        <source src="./sound/shake.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="fart">
+        <source src="./sound/fart-1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="winner">
+        <source src="./sound/winner.mp3" type="audio/mpeg">
+    </audio>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+    <script src="src/app.js"></script>
+
+</body>
+
+</html>
